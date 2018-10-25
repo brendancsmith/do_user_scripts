@@ -1,0 +1,14 @@
+#cloud-config
+
+users:
+  - name: brendan
+    groups: sudo
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh-import-id: 'gh:brendancsmith'
+
+runcmd:
+  - conf='/etc/ssh/sshd_config'
+  - var='PermitRootLogin'; val='no'; grep -q -e "^$var" $conf && sed -i "s/^\([ \t]*$var\).*/\1 $val/" $conf || echo -e "\n$var $val" >> $conf
+  - var='AllowUsers'; val='brendan'; grep -q -e "^$var" $conf && sed -i "s/^\([ \t]*$var.*\)/\1 $val/" $conf || echo -e "\n$var $val" >> $conf
+  - service ssh restart

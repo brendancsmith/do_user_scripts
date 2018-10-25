@@ -1,0 +1,9 @@
+#cloud-config
+
+packages:
+  - fail2ban
+
+runcmd:
+  - conf='/etc/fail2ban/jail.local'
+  - cp /etc/fail2ban/jail.conf $conf
+  # TODO: smart bantime replace for [default]

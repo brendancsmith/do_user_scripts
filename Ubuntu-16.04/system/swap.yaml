@@ -1,0 +1,19 @@
+#cloud-config
+#
+# Swap File Creator
+#
+# This script will create and configure a swap file
+# on your droplet at creation time.
+swap:
+   filename: /var/swap.img
+   size: "auto"
+   maxsize: 2147483648 # 2 GiB
+
+write_files:
+  - path: /etc/sysctl.d/60-swap.conf
+  - content: | 
+      vm.swappiness=30
+      vm.vfs_cache_pressure=50
+
+runcmd:
+  sysctl --system
