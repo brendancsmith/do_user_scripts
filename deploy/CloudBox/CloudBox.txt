@@ -1,0 +1,4 @@
+#include-once
+
+https://raw.githubusercontent.com/brendancsmith/do_user_scripts/cloudbox/deploy/CloudBox/deploy.yaml
+https://raw.githubusercontent.com/brendancsmith/do_user_scripts/cloudbox/deploy/CloudBox/install.sh

@@ -1,0 +1,34 @@
+#cloud-config
+
+package_update: true
+package_upgrade: true
+
+packages:
+  - curl
+  - fail2ban
+  - man
+  - htop
+  - nano
+
+disable_root: true
+ssh_deletekeys: true
+
+users:
+  - name: brendan
+    groups: sudo
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh-import-id: 'brendancsmith'
+
+runcmd:
+  #- passwd -d brendan
+  #- passwd -e brendan
+  - cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+  - var='PermitRootLogin'; val='no'; grep -q -e "^$var" $conf && sed -i "s/^\([ \t]*$var\).*/\1 $val/" $conf || echo -e "\n$var $val" >> $conf
+  - var='AllowUsers'; val='brendan'; grep -q -e "^$var" $conf && sed -i "s/^\([ \t]*$var.*\)/\1 $val/" $conf || echo -e "\n$var $val" >> $conf
+  - var='X11Forwarding'; val='no'; grep -q -e "^$var" $conf && sed -i "s/^\([ \t]*$var.*\)/\1 $val/" $conf || echo -e "\n$var $val" >> $conf
+  - service ssh reload
+  - curl -sSL https://agent.digitalocean.com/install.sh | sh
+
+power_state:
+  mode: reboot
