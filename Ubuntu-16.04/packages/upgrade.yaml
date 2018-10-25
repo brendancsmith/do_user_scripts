@@ -1,4 +1,4 @@
 #cloud-config
 
-apt-update: true
-apt-upgrade: true
+package_update: true
+package_upgrade: true

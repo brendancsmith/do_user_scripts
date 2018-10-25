@@ -5,7 +5,7 @@ users:
     groups: sudo
     shell: /bin/bash
     sudo: ['ALL=(ALL) NOPASSWD:ALL']
-    ssh-import-id: 'gh:brendancsmith'
+    ssh-import-id: 'brendancsmith'
 
 runcmd:
   - conf='/etc/ssh/sshd_config'
