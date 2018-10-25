@@ -1,0 +1,15 @@
+[Unit]
+Description=RaiBlocks node service
+After=network.target docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+ExecStartPre=-/usr/bin/docker stop %n
+ExecStartPre=-/usr/bin/docker rm %n
+ExecStartPre=/usr/bin/docker pull clemahieu/rai_node
+ExecStart=/usr/bin/docker run --rm --name %n -p 7075:7075/udp -p 7075:7075 -p [::1]:7076:7076 -v /root/rai-node:/root clemahieu/rai_node /rai_node --daemon
+
+[Install]
+WantedBy=multi-user.target

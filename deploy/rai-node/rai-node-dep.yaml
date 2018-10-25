@@ -1,0 +1,25 @@
+#cloud-config
+
+packages:
+  - man
+  - htop
+  - jq
+
+runcmd:
+  - ufw default deny incoming
+  - ufw default allow outgoing
+  - ufw allow ssh
+  - ufw allow 7075 comment 'RaiBlocks node peer connection'
+  - ufw allow 7076 comment 'RaiBlocks node RPC'
+  - ufw enable
+
+runcmd:
+  - curl "https://raw.githubusercontent.com/brendancsmith/do_user_scripts/rai-node/deploy/rai-node/rai-node.service" -o /etc/systemd/system/rai-node.service
+  - systemctl enable rai-node
+  - service rai-node start && service rai-node stop && docker kill rai-rode.service
+  # TODO: these replaces are brittle. write/use a tool to load the json, replace, and re-serialize
+  - conf='/root/rai-node/RaiBlocks/config.json'
+  - jq '.rpc.address="::ffff:0.0.0.0"' $conf > $$.tmp && mv $$.tmp $conf
+  - jq '.rpc_enable="true"' $conf > $$.tmp && mv $$.tmp $conf
+  #- jq '.rpc.enable_control="true"' $conf > $$.tmp && mv $$.tmp $conf
+  

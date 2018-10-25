@@ -1,0 +1,9 @@
+#include
+
+https://raw.githubusercontent.com/brendancsmith/do_user_scripts/rai-node/Ubuntu-16.04/packages/upgrade.yaml
+https://raw.githubusercontent.com/brendancsmith/do_user_scripts/rai-node/Ubuntu-16.04/admin/user.yaml
+https://raw.githubusercontent.com/brendancsmith/do_user_scripts/rai-node/Ubuntu-16.04/system/swap.yaml
+https://raw.githubusercontent.com/brendancsmith/do_user_scripts/rai-node/Ubuntu-16.04/admin/fail2ban.yaml
+https://raw.githubusercontent.com/brendancsmith/do_user_scripts/rai-node/Ubuntu-16.04/containers/docker.sh
+https://raw.githubusercontent.com/brendancsmith/do_user_scripts/rai-node/deploy/rai-node/rai-node-dep.yaml
+https://raw.githubusercontent.com/brendancsmith/do_user_scripts/rai-node/Ubuntu-16.04/system/reboot.yaml
