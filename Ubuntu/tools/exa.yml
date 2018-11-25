@@ -1,0 +1,10 @@
+#cloud-config
+
+packages:
+  libgit2-24
+  libgit2-dev
+  cmake
+  git
+  libhttp-parser2.1
+
+curl https://sh.rustup.rs -sSf | sh
